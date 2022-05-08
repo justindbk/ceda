@@ -7,4 +7,4 @@ The script `01-ceda_fixes.R` reads in the composite file and makes line-edits to
 
 ## To contribute further edits:
 
-Please contribute and document all edits that you believe are needed for the elections data by submitting a pull request for the `01-ceda_fixes.R` script file.
+Please contribute and document all edits that you believe are needed for the composite elections data file by submitting a pull request for the `01-ceda_fixes.R` script file. Alternatively, [email the authors](mailto:jdbk@hks.harvard.edu,ribernhard@ucdavis.edu?subject=CEDA%20data%20fixes), post a suggested edit in [Issues](https://github.com/justindbk/ceda/issues), shoot us a Twitter DM, or contact us via any other means of contact. We appreciate any assistance from others in keeping this collective resource accurate.
