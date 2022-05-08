@@ -1,5 +1,5 @@
-# CEDA
-This repository compiles the yearly California Elections Data Archive (CEDA) files into one large composite file for all available years, and provides fixes for accuracy that resulted from hand-checking done by the authors and contributors.
+# Errors in CEDA
+This repository compiles the yearly California Elections Data Archive (CEDA) files into one large composite file for all available years, and provides fixes for errors that were found via hand-checking done by the authors and contributors.
 
 The script `00-ceda_compile.R` reads in all yearly spreadsheet files downloaded from the CSU Sacramento CEDA portal [here](https://csus-dspace.calstate.edu/handle/10211.3/210187), compiles them into similar format, and outputs a composite file.
 
