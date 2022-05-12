@@ -1,4 +1,4 @@
-## This script fixes errors in the CEDA dataset as downloaded rom the yearly 
+## This script fixes errors in the CEDA dataset as downloaded from the yearly 
 ##    datasets available on the CSU Sacramento/CA SOS website:
 ##    https://csu-csus.esploro.exlibrisgroup.com/esploro/outputs/dataset/California-Elections-Data-Archive-CEDA/99257830890201671?institution=01CALS_USL
 
@@ -358,6 +358,12 @@ ceda$elected[which(ceda$record_id==200100082)] <- 1
 ceda$elected[which(ceda$record_id==200100084)] <- 1
 
 
+# "incumbent" indicator incorrect in many easily detectable places:
+# View(ceda_w %>% filter(incumb=="N" & (str_detect(baldesig,"incumbent") | str_detect(baldesig,"Incumbent") | str_detect(baldesig,"Current") | str_detect(baldesig,"current"))) %>% arrange(date)) # 642 of these listed wrong
+ceda_w$incumb[which(ceda_w$baldesig=="Incumbent")] <- "Y"
+ceda_w$incumb[which(ceda_w$baldesig=="Appointed incumbent")] <- "Y"
+ceda_w$incumb[which(ceda_w$baldesig=="Appointed Incumbent")] <- "Y"
+# View(ceda_w[which(str_detect(ceda_w$baldesig,"Current")),]) # could probably change these too, but not 100% clear whether always true
 
 
 ## Output data ----------------------
