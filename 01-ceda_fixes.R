@@ -419,10 +419,10 @@ plumas06_add <- data.frame(record_id=c(990000001),
                            office="SHERIFF",recode_office=5,recode_offname="OTHER COUNTY OFFICE",term="Full",
                            last="Bergstrand",first="Terry A.",
                            baldesig="Incumbent", # he won the 2002 election
-                           incumb="Y",num_inc=1,cand_number=1,
+                           incumb="Y",num_inc=1,cand_number=1,vote_number=1,
                            votes=5272,writein=135,totvotes=5407,percent=0.9750324,
                            elected="1",rvotes=1,checkrunoff=0
-                           )
+)
 ceda <- bind_rows(ceda,plumas06_add)
 
 # Mariposa County 2006 - sheriff and other county races missing from data (but has school boards)
@@ -431,18 +431,20 @@ ceda <- bind_rows(ceda,plumas06_add)
 # https://www.mariposacounty.org/DocumentCenter/View/84833/November-2006-Consolidated-General-Election
 # View(ceda %>% filter(str_detect(tolower(cntyname),"mariposa") & year==2006))
 mariposa06_add <- data.frame(record_id=c(990000002),
-                           race_id = c(200699002),
-                           co=22, jur=1,cntyname="MARIPOSA",
-                           year=2006,month=6,date=as.Date("2006-06-06"),
-                           place="MARIPOSA",
-                           office="SHERIFF",recode_office=5,recode_offname="OTHER COUNTY OFFICE",term="Full",
-                           last="Allen",first="James Jim",
-                           baldesig="Appointed Incumbent", # per county mtg minutes http://www.mariposacounty.org/DocumentCenter/View/25133/Resolution_2008-001?bidId=
-                           incumb="Y",num_inc=1,cand_number=1,
-                           votes=2661,writein=NA,totvotes=2661,percent=NA,
-                           elected="1",rvotes=1,checkrunoff=0
+                             race_id = c(200699002),
+                             co=22, jur=1,cntyname="MARIPOSA",
+                             year=2006,month=6,date=as.Date("2006-06-06"),
+                             place="MARIPOSA",
+                             office="SHERIFF",recode_office=5,recode_offname="OTHER COUNTY OFFICE",term="Full",
+                             last="Allen",first="James Jim",
+                             baldesig="Appointed Incumbent", # per county mtg minutes http://www.mariposacounty.org/DocumentCenter/View/25133/Resolution_2008-001?bidId=
+                             incumb="Y",num_inc=1,cand_number=1,vote_number=1,
+                             votes=2661,writein=NA,totvotes=2661,percent=NA,
+                             elected="1",rvotes=1,checkrunoff=0
 )
 ceda <- bind_rows(ceda,mariposa06_add)
+
+
 
 
 
