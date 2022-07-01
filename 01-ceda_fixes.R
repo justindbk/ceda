@@ -357,13 +357,95 @@ ceda$vote_number[which(ceda$race_id==200100022)] <- 3
 ceda$elected[which(ceda$record_id==200100082)] <- 1
 ceda$elected[which(ceda$record_id==200100084)] <- 1
 
+## Errors in sheriff elections reported by Emily Farris, June 2022:
+# both candidates for 1998 Plumas County Sheriff (race_id==199800346) incorrectly listed as also running in Placer County for sheriff in 1998
+# View(ceda %>% filter(race_id==199800331))
+# real candidate in another race_id:
+# View(ceda %>% filter(race_id==199800330))
+# removing two records:
+ceda <- ceda %>% filter(record_id != 199800619)
+ceda <- ceda %>% filter(record_id != 199800618)
 
-# "incumbent" indicator incorrect in many easily detectable places:
-# View(ceda_w %>% filter(incumb=="N" & (str_detect(baldesig,"incumbent") | str_detect(baldesig,"Incumbent") | str_detect(baldesig,"Current") | str_detect(baldesig,"current"))) %>% arrange(date)) # 642 of these listed wrong
-ceda_w$incumb[which(ceda_w$baldesig=="Incumbent")] <- "Y"
-ceda_w$incumb[which(ceda_w$baldesig=="Appointed incumbent")] <- "Y"
-ceda_w$incumb[which(ceda_w$baldesig=="Appointed Incumbent")] <- "Y"
-# View(ceda_w[which(str_detect(ceda_w$baldesig,"Current")),]) # could probably change these too, but not 100% clear whether always true
+# missing El Dorado 2010 sheriff race?
+# actually, this is just listed as "Coroner/Public Administrator/S" rather than "sheriff"
+# View(ceda %>% filter(race_id==201000086)) # primary in June
+# View(ceda %>% filter(race_id==201000097)) # general in November
+# changing office name to be correct:
+ceda$office[which(ceda$race_id==201000086)] <- "SHERIFF-CORONER-PUBLIC ADMINISTRATOR" # consistent w/ future years
+ceda$office[which(ceda$race_id==201000097)] <- "SHERIFF-CORONER-PUBLIC ADMINISTRATOR" # consistent w/ future years
+
+# Kern 2010 sheriff race - same issue:
+# View(ceda %>% filter(race_id==201000161)) # primary in June
+ceda$office[which(ceda$race_id==201000161)] <- "SHERIFF-CORONER-PUBLIC ADMINISTRATOR" # consistent w/ future years
+
+# Kings County 2010 - same issue:
+# View(ceda %>% filter(race_id==201000174)) # primary in June
+ceda$office[which(ceda$race_id==201000174)] <- "SHERIFF-CORONER-PUBLIC ADMINISTRATOR" # consistent w/ future years
+
+# Mariposa County 2010
+# View(ceda %>% filter(race_id==201000238)) # primary in June
+ceda$office[which(ceda$race_id==201000238)] <- "SHERIFF-CORONER-PUBLIC ADMINISTRATOR" # consistent w/ future years
+
+# Nevada County 2010
+# View(ceda %>% filter(race_id==201000306)) # primary in June
+ceda$office[which(ceda$race_id==201000306)] <- "SHERIFF-CORONER-PUBLIC ADMINISTRATOR" # consistent w/ future years
+
+# Orange County 2010
+# View(ceda %>% filter(race_id==201000318)) # primary in June
+ceda$office[which(ceda$race_id==201000318)] <- "SHERIFF-CORONER" # consistent w/ past+future years
+
+# Riverside County 2010
+# View(ceda %>% filter(race_id==201000358)) # primary in June
+ceda$office[which(ceda$race_id==201000358)] <- "SHERIFF-CORONER-PUBLIC ADMINISTRATOR" # consistent w/ future years
+
+# San Bernardino County 2010
+# View(ceda %>% filter(race_id==201000391)) # primary in June
+ceda$office[which(ceda$race_id==201000391)] <- "SHERIFF-CORONER-PUBLIC ADMINISTRATOR" # consistent w/ future years
+
+# San Joaquin County 2010
+# View(ceda %>% filter(race_id==201000431)) # primary in June
+ceda$office[which(ceda$race_id==201000431)] <- "SHERIFF-CORONER-PUBLIC ADMINIS" # consistent w/ past years
+
+# Plumas County 2006 - sheriff and other city/county races missing from data
+# but these races did happen (primaries in June, general in Nov):
+# https://www.plumascounty.us/DocumentCenter/View/16635/06-06-2006-Primary---SOVC?bidId=
+# https://www.plumascounty.us/DocumentCenter/View/16642/11-07-2006-General-Final-Report?bidId=
+# View(ceda %>% filter(str_detect(tolower(cntyname),"plumas") & year==2006))
+plumas06_add <- data.frame(record_id=c(990000001),
+                           race_id = c(200699001),
+                           co=32, jur=1,cntyname="PLUMAS",
+                           year=2006,month=6,date=as.Date("2006-06-06"),
+                           place="PLUMAS",
+                           office="SHERIFF",recode_office=5,recode_offname="OTHER COUNTY OFFICE",term="Full",
+                           last="Bergstrand",first="Terry A.",
+                           baldesig="Incumbent", # he won the 2002 election
+                           incumb="Y",num_inc=1,cand_number=1,
+                           votes=5272,writein=135,totvotes=5407,percent=0.9750324,
+                           elected="1",rvotes=1,checkrunoff=0
+                           )
+ceda <- bind_rows(ceda,plumas06_add)
+
+# Mariposa County 2006 - sheriff and other county races missing from data (but has school boards)
+# but many of these races happened (June primary and November general):
+# https://www.mariposacounty.org/DocumentCenter/View/84809/June-2006-Gubernatorial-Primary-Election
+# https://www.mariposacounty.org/DocumentCenter/View/84833/November-2006-Consolidated-General-Election
+# View(ceda %>% filter(str_detect(tolower(cntyname),"mariposa") & year==2006))
+mariposa06_add <- data.frame(record_id=c(990000002),
+                           race_id = c(200699002),
+                           co=22, jur=1,cntyname="MARIPOSA",
+                           year=2006,month=6,date=as.Date("2006-06-06"),
+                           place="MARIPOSA",
+                           office="SHERIFF",recode_office=5,recode_offname="OTHER COUNTY OFFICE",term="Full",
+                           last="Allen",first="James Jim",
+                           baldesig="Appointed Incumbent", # per county mtg minutes http://www.mariposacounty.org/DocumentCenter/View/25133/Resolution_2008-001?bidId=
+                           incumb="Y",num_inc=1,cand_number=1,
+                           votes=2661,writein=NA,totvotes=2661,percent=NA,
+                           elected="1",rvotes=1,checkrunoff=0
+)
+ceda <- bind_rows(ceda,mariposa06_add)
+
+
+
 
 
 ## Output data ----------------------
