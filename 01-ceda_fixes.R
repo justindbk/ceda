@@ -12,14 +12,14 @@ library(tidyverse)
 
 ## Read data -------------------------------------------------------------------
 
-ceda <- read_csv("ceda_allcandidates_1995-2020.csv",guess_max = 200000)
+ceda <- read_rds("ceda_allcandidates_1995-2021.rds")
 # merge two raceid vars:
 ceda <- ceda %>%
   mutate(race_id = coalesce(race_id,raceid))
 
-ceda$date <- lubridate::ymd_hms(ceda$date)
-ceda$date <- lubridate::date(ceda$date) # to take out hms from some places
-summary(ceda$date) # from 1995 to 2020
+# ceda$date <- lubridate::ymd_hms(ceda$date)
+# ceda$date <- lubridate::date(ceda$date) # to take out hms from some places
+summary(ceda$date) # from 1995 to 2021
 
 ## Fixes ----------------------------------------------------------------------
 # Kamala Harris's 2003 SF DA race:
@@ -452,4 +452,4 @@ ceda <- bind_rows(ceda,mariposa06_add)
 
 ## Output data ----------------------
 # write_csv(ceda,"ceda_allcandidates_1995-2020_fixed.csv")
-write_rds(ceda,"ceda_allcandidates_1995-2020_fixed.rds",compress = "gz")
+write_rds(ceda,"ceda_allcandidates_1995-2021_fixed.rds",compress = "gz")

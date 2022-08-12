@@ -146,9 +146,9 @@ ceda_all$term[ceda_all$term == "FUll"] <- "Full"
 ceda_all <- ceda_all %>%
   mutate(month = lubridate::month(date))
 tabyl(ceda_all$month) # worked for all of them
-ceda$date <- lubridate::ymd_hms(ceda$date)
-ceda$date <- lubridate::date(ceda$date) # to take out hms from some places
-summary(ceda$date) # from 1995 to 2020
+ceda_all$date <- lubridate::ymd_hms(ceda_all$date)
+ceda_all$date <- lubridate::date(ceda_all$date) # to take out hms from some places
+summary(ceda_all$date) # from 1995 to 2021
 
 # 1995 also missing recoded office name and office num:
 ceda_all$recode_offname[ceda_all$year==1995] <- ceda_all$office[ceda_all$year==1995]
@@ -205,4 +205,4 @@ ceda_all <- ceda_all %>%
 
 #### Output data ####
 # write_csv(ceda_all,"ceda_allcandidates_1995-2020.csv")
-write_rds(ceda_all,"ceda_allcandidates_1995-2020.rds",compress = "gz")
+write_rds(ceda_all,"ceda_allcandidates_1995-2021.rds",compress = "gz")
