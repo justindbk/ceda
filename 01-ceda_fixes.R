@@ -363,8 +363,8 @@ ceda$elected[which(ceda$record_id==200100084)] <- 1
 # real candidate in another race_id:
 # View(ceda %>% filter(race_id==199800330))
 # removing two records:
-ceda <- ceda %>% filter(record_id != 199800619)
-ceda <- ceda %>% filter(record_id != 199800618)
+ceda <- ceda %>% filter(record_id != 199800619 | is.na(record_id))
+ceda <- ceda %>% filter(record_id != 199800618 | is.na(record_id))
 
 # missing El Dorado 2010 sheriff race?
 # actually, this is just listed as "Coroner/Public Administrator/S" rather than "sheriff"
