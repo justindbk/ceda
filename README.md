@@ -13,7 +13,7 @@ Please contribute and document all edits that you believe are needed for the com
 
 We recommend the following citation.
 
-de Benedictis-Kessner, Justin, and Rachel Bernhard. 2022. ``Concatenated Files Fixing Errors in the California Elections Data Archive (CEDA)." GitHub repository, online: [https://github.com/justindbk/ceda](https://github.com/justindbk/ceda)
+de Benedictis-Kessner, Justin, and Rachel Bernhard. 2022. "Concatenated Files Fixing Errors in the California Elections Data Archive (CEDA)." GitHub repository, online: [https://github.com/justindbk/ceda](https://github.com/justindbk/ceda)
 
 ```
 @misc{dbk_ceda_fixed,
