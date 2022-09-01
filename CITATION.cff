@@ -9,6 +9,8 @@ message: >-
   If you use this dataset, please cite it using the
   metadata from this file.
 type: dataset
+year: 2022
+howpublished: Github repository
 url: https://github.com/justindbk/ceda/
 authors:
   - given-names: Justin
