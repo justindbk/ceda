@@ -166,19 +166,25 @@ ceda_all$recode_offname[ceda_all$recode_offname == "OTHER COUNTY"] <- "OTHER COU
 ceda_all$recode_offname[ceda_all$recode_offname == "OTHER COUNTY OFFICES"] <- "OTHER COUNTY OFFICE"
 ceda_all$recode_offname[ceda_all$recode_offname == "SCHOOL BOARD MEMBER"] <- "SCHOOL BOARD"
 ceda_all$recode_offname[grep(x = ceda_all$office, pattern="MAYOR",ignore.case = T)] <- "MAYOR"
-table(ceda_all$recode_offname) # better now
+tabyl(ceda_all,recode_offname) # better now
 
 ceda_all <- ceda_all %>%
   mutate(recode_office = case_when(
     recode_offname == "COUNTY SUPERVISOR" ~ 1 ,
     recode_offname == "CITY COUNCIL" ~ 2,
-    recode_offname == "SCHOOOL BOARD MEMBER" ~ 3 ,
+    recode_offname == "SCHOOL BOARD" ~ 3 ,
     recode_offname == "CSD/CSA DIRECTOR" ~ 4,
     recode_offname == "OTHER COUNTY OFFICE" ~ 5,
     recode_offname == "SUPERIOR JUDGE" ~ 5,
     recode_offname == "OTHER CITY OFFICE" ~ 6,
+    recode_offname == "CITY ATTORNEY" ~ 6,
+    recode_offname == "CITY CLERK" ~ 6,
+    recode_offname == "CITY CLERK-ASSESSOR" ~ 6,
+    recode_offname == "CITY TREASURER" ~ 6,
     recode_offname == "MAYOR" ~ 6,
     recode_offname == "OTHER SCHOOL DISTRICT OFFICE" ~ 7 ))
+tabyl(ceda_all,recode_offname,recode_office) # better now
+
 
 ## areas missing for many city council races:
 tabyl(filter(ceda_all, recode_offname=="CITY COUNCIL"), area) # missing in 25331 cases
@@ -205,4 +211,4 @@ ceda_all <- ceda_all %>%
 
 #### Output data ####
 # write_csv(ceda_all,"ceda_allcandidates_1995-2020.csv")
-write_rds(ceda_all,"ceda_allcandidates_1995-2021.rds",compress = "gz")
+write_rds(ceda_all,"ceda_allcandidates_1995-2023.rds",compress = "gz")
