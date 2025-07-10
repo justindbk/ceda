@@ -211,4 +211,4 @@ ceda_all <- ceda_all %>%
 
 #### Output data ####
 # write_csv(ceda_all,"ceda_allcandidates_1995-2020.csv")
-write_rds(ceda_all,"ceda_allcandidates_1995-2023.rds",compress = "gz")
+write_rds(ceda_all,"ceda_allcandidates_1995-2024.rds",compress = "gz")
